@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
+ 	
+ 	<context:component-scan base-package="quartz_spring" />
+ 	
+ 	<!-- job -->
+ 	<bean id="helloJob" 
+ 		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+ 		<property name="jobClass" value="quartz_spring.job.HelloJob" />
+ 	</bean>
+ 	
+ 	<!-- trigger -->
+ 	<bean id="simpleTrigger" 
+ 		class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+ 		<property name="jobDetail" ref="helloJob" />
+ 		<!-- 3秒后第一次执行 -->
+ 		<property name="startDelay" value="3000" />
+ 		<!-- 5秒后重复执行 -->
+ 		<property name="repeatInterval" value="5000" />
+ 	</bean>
+	<!--cron-->
+<!--
+
+	<bean id="cronTrigger"
+			class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="helloJob" />
+		<property name="cronExpression" value="cron表达式"/>
+	</bean>
+-->
+
+ 	<!-- scheduler  -->
+ 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<!--解决bean无法注入问题-->
+ 		<property name="jobFactory" ref="jobFactory" />
+ 		<property name="triggers">
+ 			<list>
+ 				<ref bean="simpleTrigger"/>
+ 			</list>
+ 		</property>
+ 	</bean>
+ 	
+</beans>

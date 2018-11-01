@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>云地理编码</title>
+		<script type="text/javascript" src="../js/jquery-1.8.3.js" ></script>
+		<script type="text/javascript">
+		    var address = encodeURIComponent("东晋桃源");
+			$.getJSON("http://api.map.baidu.com/cloudgc/v1?geotable_id=194192&ak=vqrmNcocSFyezmi5fnuoIiCsEQGyC9P8&address="+address+"&callback=?",function(data){
+				console.log(data);
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

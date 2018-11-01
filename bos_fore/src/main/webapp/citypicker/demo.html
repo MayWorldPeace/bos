@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/jquery-1.8.3.js" ></script>
+    <script type="text/javascript" src="js/city-picker.data.js" ></script>
+    <script type="text/javascript" src="js/city-picker.js" ></script>
+    <link rel="stylesheet" href="css/city-picker.css" />
+    <script type="text/javascript">
+        $(function () {
+            $("#demo").citypicker();
+            $("#reset").click(function () {
+                $('#demo').citypicker('reset');
+                $('#demo').citypicker('destroy');
+                $('#demo').citypicker({
+                    province:'陕西省',
+                    city:'西安市',
+                    district:'户县'
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div style="position: relative;">
+        <input id="demo" name="area" type="text"  size="80"/>
+        <input type="button" id="reset" value="重置">
+    </div>
+</body>
+</html>
